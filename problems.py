@@ -18,4 +18,4 @@ IS WHEN YOU SEARCH FOR A TEAM, SOMETIMES THERS MORE THAN ONE TEAM/PLAYER WITH TH
 NOT WHAT WE SEARCH, 
 SO I ADD A TRY AND EXCEPT BLOCK THAT HANDLE THIS ISSUE BY SELECTING TEAM CATEGORY WHEN THIS PROBLEM OCCURS'''
 
-''' i fucking hate web scraping, i dont know why i do this to myself, i should just use the api, but i like to suffer'''
+''' i fucking hate web scraping, i dont know why i do   this t o myself, i should just use the api, but i like to suffer'''
