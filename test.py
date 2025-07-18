@@ -1,27 +1,52 @@
-from selenium import webdriver 
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
+import requests
+from bs4 import BeautifulSoup
 import pandas as pd
+import re
 
 
-url = "https://www.transfermarkt.fr/afc-sunderland/startseite/verein/289/saison_id/2025"
 
-path  = "C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"
-options = Options()
-options.binary_location = path 
-# Initialize the driver (use ChromeDriver)
-driver = webdriver.Chrome(service=Service(), options=options)
-driver.get(url)
-container = driver.find_element(By.XPATH , "//*[@id='yw1']/table/tbody")
-alllinks= container.find_elements(By.XPATH , '//*[@id="yw1"]/table/tbody/tr/td/table/tbody/tr/td/a')
-links = pd.DataFrame(columns = ['Player','link'])
-for link in alllinks :
-    link = link.get_attribute("href")
-    name = " ".join(link[28:].split("/")[1].split("-"))
-    print(link, '\n',name)
-    if name not in links['Player'].values :
-        links.loc[len(links)] = [name,link]
-    continue
+
+
+def scrape_team_players(team_url, PlayersTM):
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+    }
     
-print(links)
+    response = requests.get(team_url, headers=headers)
+    soup = BeautifulSoup(response.content, 'html.parser')
+    
+    # Find squad table
+    squad_table = soup.find('table', class_='items')
+    player_rows = squad_table.find_all('tr', class_=['odd', 'even'])
+    
+    for row in player_rows:
+        # Get player name
+        name_cell = row.find('td', class_='hauptlink')
+        player_name = name_cell.find('a').text.strip()
+        
+        # Get market value
+        value_cell = row.find('td', class_='rechts hauptlink')
+        market_value = value_cell.text.strip()
+        
+        # Convert value to number
+        if 'm' in market_value.lower():
+            value_num = float(re.findall(r'[\d.]+', market_value)[0]) * 1000000
+        elif 'k' in market_value.lower():
+            value_num = float(re.findall(r'[\d.]+', market_value)[0]) * 1000
+        else:
+            value_num = 0.0
+        
+        # Add to DataFrame
+        new_row = pd.DataFrame({
+            'Player_Name': [player_name],
+            'Market_Value': [market_value],
+            'Market_Value_EUR': [value_num]
+        })
+        
+        PlayersTM = pd.concat([PlayersTM, new_row], ignore_index=True)
+    
+    return PlayersTM
+
+
+
+scrape_team_players()
