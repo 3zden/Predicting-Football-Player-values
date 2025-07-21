@@ -8,7 +8,7 @@ as a solution, i searched for a informations that exist in all rows and make the
 since theres no names with length > 4 mots 
 jai traiter chaque cas manuellement pour eviter a augmenter la complexité du code
 '''
-
+ 
 '''second problem 
 while scraping i found that there is when you search for some teams it didnt show the right page which causes an issue while searching for data
 i use exception to handle this error'''
