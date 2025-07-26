@@ -5,7 +5,7 @@ players rows have different lengths (some players didnt play any match, some jus
 
 as a solution, i searched for a informations that exist in all rows and make theme as a references
 
-since theres no names with length > 4 mots 
+since theres no names with length > 4 mots  
 jai traiter chaque cas manuellement pour eviter a augmenter la complexité du code
 '''
  
