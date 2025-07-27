@@ -12,7 +12,7 @@ This project aims to develop accurate predictive models for estimating football 
 - **Feature engineering**: Creation of meaningful features from raw player data
 - **Model evaluation**: Rigorous testing and validation of predictive performance
 - **Interactive visualizations**: Charts and graphs to understand value drivers
- 
+  
 ## 🎯 Objectives
 
 1. **Predict accurate market values** for football players based on performance and demographic data
