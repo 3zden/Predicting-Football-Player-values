@@ -4,7 +4,7 @@ while scraping data from fbref website is inserting data in the dataframe
 players rows have different lengths (some players didnt play any match, some just sign the contrat (no data availliable = small length)), which causes issues when you tryna insert the data into a DataFrame.
  
 as a solution, i searched for a informations that exist in all rows and make theme as a references
- 
+  
 since theres no names with length > 4 mots  
 jai traiter chaque cas manuellement pour eviter a augmenter la complexité du code
 '''
