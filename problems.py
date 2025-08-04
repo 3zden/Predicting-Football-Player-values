@@ -1,5 +1,5 @@
  '''first problem:  
-      
+       
 while scraping data from fbref website is inserting data in the dataframe
 players rows have different lengths (some players didnt play any match, some just sign the contrat (no data availliable = small length)), which causes issues when you tryna insert the data into a DataFrame.
  
